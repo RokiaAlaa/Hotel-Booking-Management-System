@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فندق الهضبة | El Hadabah Hotel</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <i class="fas fa-hotel"></i>
+                    <span class="logo-text">فندق الهضبة</span>
+                    <span class="logo-subtitle">El Hadabah Hotel</span>
+                </div>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="active">الرئيسية</a></li>
+                    <li><a href="#rooms">الغرف</a></li>
+                    <li><a href="#services">الخدمات</a></li>
+                    <li><a href="#about">من نحن</a></li>
+                    <li><a href="#contact">اتصل بنا</a></li>
+                    <li><a href="/book-start" class="btn-nav">احجز الآن</a></li>
+                </ul>
+                
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title animate-fade-in">مرحباً بك في فندق الهضبة</h1>
+            <p class="hero-subtitle animate-fade-in-delay">تجربة إقامة فاخرة لا تُنسى في قلب الإسكندرية</p>
+            <div class="hero-buttons animate-fade-in-delay-2">
+                <a href="#rooms" class="btn btn-primary">استكشف الغرف</a>
+                <a href="/book-start" class="btn btn-secondary">احجز الآن</a>
+            </div>
+        </div>
+        
+        <!-- Quick Booking Widget -->
+        <div class="quick-booking">
+            <form class="booking-form">
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-check"></i> تاريخ الوصول</label>
+                    <input type="date" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-times"></i> تاريخ المغادرة</label>
+                    <input type="date" required>
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-users"></i> عدد الضيوف</label>
+                    <select required>
+                        <option value="">اختر</option>
+                        <option value="1">1 شخص</option>
+                        <option value="2">2 أشخاص</option>
+                        <option value="3">3 أشخاص</option>
+                        <option value="4">4 أشخاص</option>
+                    </select>
+                </div>
+                <a href="/rooms" class="btn btn-booking">
+                    <i class="fas fa-search"></i> ابحث عن غرفة
+                </a>
+            </form>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-wifi"></i>
+                    </div>
+                    <h3>WiFi مجاني</h3>
+                    <p>إنترنت عالي السرعة في جميع أنحاء الفندق</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-swimming-pool"></i>
+                    </div>
+                    <h3>حمام سباحة</h3>
+                    <p>استمتع بالسباحة مع إطلالة ساحرة</p>
+                </div>
+              
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-concierge-bell"></i>
+                    </div>
+                    <h3>خدمة الغرف</h3>
+                    <p>خدمة على مدار 24 ساعة</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-parking"></i>
+                    </div>
+                    <h3>موقف سيارات</h3>
+                    <p>موقف آمن ومجاني للنزلاء</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rooms Section -->
+    <section id="rooms" class="rooms">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">الغرف والأجنحة</span>
+                <h2 class="section-title">اختر غرفتك المثالية</h2>
+                <p class="section-description">نوفر لك مجموعة متنوعة من الغرف الفاخرة</p>
+            </div>
+
+            <div class="rooms-grid">
+                <!-- Room Card 1 -->
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600" alt="Single Room">
+                        <div class="room-badge">متاح</div>
+                    </div>
+                    <div class="room-content">
+                        <h3 class="room-title">غرفة فردية</h3>
+                        <p class="room-description">غرفة أنيقة مع سرير مفرد وجميع وسائل الراحة الحديثة</p>
+                        
+                        <div class="room-features">
+                            <span><i class="fas fa-bed"></i> سرير فردي</span>
+                            <span><i class="fas fa-expand"></i> 20 م²</span>
+                            <span><i class="fas fa-eye"></i> إطلالة على المدينة</span>
+                        </div>
+                        
+                        <div class="room-footer">
+                            <div class="room-price">
+                                <span class="price">500 جنيه</span>
+                                <span class="per-night">/ لليلة</span>
+                            </div>
+                            <a href="/book-start" class="btn btn-room">احجز الآن</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Room Card 2 -->
+                <div class="room-card featured">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600" alt="Double Room">
+                        <div class="room-badge popular">الأكثر طلباً</div>
+                    </div>
+                    <div class="room-content">
+                        <h3 class="room-title">غرفة مزدوجة</h3>
+                        <p class="room-description">غرفة واسعة مع سرير مزدوج وإطلالة ساحرة على البحر</p>
+                        
+                        <div class="room-features">
+                            <span><i class="fas fa-bed"></i> سرير مزدوج</span>
+                            <span><i class="fas fa-expand"></i> 30 م²</span>
+                            <span><i class="fas fa-water"></i> إطلالة على البحر</span>
+                        </div>
+                        
+                        <div class="room-footer">
+                            <div class="room-price">
+                                <span class="price">800 جنيه</span>
+                                <span class="per-night">/ لليلة</span>
+                            </div>
+                            <a href="/book-start" class="btn btn-room">احجز الآن</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Room Card 3 -->
+                <div class="room-card">
+                    <div class="room-image">
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600" alt="Suite">
+                        <div class="room-badge luxury">فاخر</div>
+                    </div>
+                    <div class="room-content">
+                        <h3 class="room-title">جناح ملكي</h3>
+                        <p class="room-description">جناح فاخر بغرفة معيشة منفصلة وشرفة خاصة</p>
+                        
+                        <div class="room-features">
+                            <span><i class="fas fa-bed"></i> King Size</span>
+                            <span><i class="fas fa-expand"></i> 50 م²</span>
+                            <span><i class="fas fa-door-open"></i> شرفة خاصة</span>
+                        </div>
+                        
+                        <div class="room-footer">
+                            <div class="room-price">
+                                <span class="price">1500 جنيه</span>
+                                <span class="per-night">/ لليلة</span>
+                            </div>
+                            <a href="/book-start" class="btn btn-room">احجز الآن</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">خدماتنا</span>
+                <h2 class="section-title">خدمات متميزة لراحتك</h2>
+            </div>
+
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-spa"></i>
+                    <h3>السبا والمساج</h3>
+                    <p>استرخِ واستمتع بجلسات مساج علاجية</p>
+                </div>
+                
+                <div class="service-card">
+                    <i class="fas fa-utensils"></i>
+                    <h3>المطعم</h3>
+                    <p>أشهى المأكولات المحلية والعالمية</p>
+                </div>
+                
+                <div class="service-card">
+                    <i class="fas fa-dumbbell"></i>
+                    <h3>صالة الجيم</h3>
+                    <p>معدات حديثة ومدربون محترفون</p>
+                </div>
+                
+                <div class="service-card">
+                    <i class="fas fa-plane-departure"></i>
+                    <h3>نقل من وإلى المطار</h3>
+                    <p>خدمة نقل مريحة وآمنة</p>
+                </div>
+                
+                <div class="service-card">
+                    <i class="fas fa-tshirt"></i>
+                    <h3>خدمة الغسيل</h3>
+                    <p>غسيل وكي سريع وعناية بملابسك</p>
+                </div>
+                
+                <div class="service-card">
+                    <i class="fas fa-business-time"></i>
+                    <h3>قاعات المؤتمرات</h3>
+                    <p>قاعات مجهزة للاجتماعات والفعاليات</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <span class="section-label">من نحن</span>
+                    <h2 class="section-title">فندق الهضبة</h2>
+                    <p class="about-description">
+                        يُعد فندق الهضبة واحداً من أفخم الفنادق في الإسكندرية، حيث نوفر لضيوفنا تجربة إقامة لا تُنسى تجمع بين الفخامة والراحة. 
+                        يقع الفندق في موقع استراتيجي يتيح لك الوصول السهل لجميع المعالم السياحية في المدينة.
+                    </p>
+                    <p class="about-description">
+                        نفتخر بتقديم أرقى الخدمات وأفضل وسائل الراحة لضمان إقامة مريحة وممتعة. فريقنا المحترف متواجد على مدار الساعة لتلبية جميع احتياجاتك.
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <h3>100+</h3>
+                            <p>غرفة فاخرة</p>
+                        </div>
+                        <div class="stat">
+                            <h3>15+</h3>
+                            <p>سنة من الخبرة</p>
+                        </div>
+                        <div class="stat">
+                            <h3>50K+</h3>
+                            <p>ضيف سعيد</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=800" alt="فندق الهضبة">
+                    <div class="about-badge">
+                        <i class="fas fa-award"></i>
+                        <span>أفضل فندق 2024</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-label">تواصل معنا</span>
+                <h2 class="section-title">نسعد بخدمتك</h2>
+            </div>
+
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>العنوان</h4>
+                            <p>شارع الجامعة، سموحة، الإسكندرية</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>الهاتف</h4>
+                            <p>+20 3 1234567</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>البريد الإلكتروني</h4>
+                            <p>info@elhadabahhotel.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-social">
+                        <h4>تابعنا على</h4>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form-main">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" placeholder="الاسم" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="البريد الإلكتروني" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="text" placeholder="الموضوع" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <textarea rows="5" placeholder="رسالتك" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> إرسال الرسالة
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-hotel"></i>
+                    <span>فندق الهضبة</span>
+                </div>
+                <p>&copy; 2024 فندق الهضبة. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
+

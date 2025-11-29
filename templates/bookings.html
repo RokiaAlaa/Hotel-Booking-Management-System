@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الحجوزات | فندق الهضبة</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        .bookings-page {
+            padding: 120px 0 60px;
+            min-height: 100vh;
+            background: #f8f9fa;
+        }
+        
+        .page-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .page-title h1 {
+            font-size: 2.5rem;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+        }
+        
+        .bookings-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th {
+            background: var(--primary-color);
+            color: white;
+            padding: 15px;
+            text-align: right;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        tr:hover {
+            background: #f5f5f5;
+        }
+        
+        .status-badge {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .status-confirmed {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-checkedin {
+            background: #cce5ff;
+            color: #004085;
+        }
+        
+        .status-completed {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 60px;
+            color: var(--text-light);
+        }
+        
+        .action-btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 0 3px;
+            font-size: 0.9rem;
+        }
+        
+        .btn-edit {
+            background: #17a2b8;
+            color: white;
+        }
+        
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <i class="fas fa-hotel"></i>
+                    <span class="logo-text">فندق الهضبة</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">الرئيسية</a></li>
+                    <li><a href="/rooms">الغرف</a></li>
+                    <li><a href="/bookings" class="active">الحجوزات</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Bookings Content -->
+    <section class="bookings-page">
+        <div class="container">
+            <div class="page-title">
+                <h1>📅 جميع الحجوزات</h1>
+                <p>إدارة وعرض حجوزات الفندق</p>
+            </div>
+
+            <div class="bookings-table">
+                {% if bookings %}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>رقم الحجز</th>
+                            <th>اسم الضيف</th>
+                            <th>رقم الغرفة</th>
+                            <th>نوع الغرفة</th>
+                            <th>تاريخ الوصول</th>
+                            <th>تاريخ المغادرة</th>
+                            <th>عدد الضيوف</th>
+                            <th>السعر</th>
+                            <th>الحالة</th>
+                            <th>الموظف</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for booking in bookings %}
+                        <tr>
+                            <td><strong>#{{ booking.Booking_ID }}</strong></td>
+                            <td>
+                                {{ booking.Guest_Name }}<br>
+                                <small style="color: #666;">{{ booking.Email }}</small>
+                            </td>
+                            <td>{{ booking.Room_Number }}</td>
+                            <td>{{ booking.Type_Name }}</td>
+                            <td>{{ booking.Check_In_Date }}</td>
+                            <td>{{ booking.Check_Out_Date }}</td>
+                            <td>{{ booking.Number_of_Guests }}</td>
+                            <td><strong>{{ booking.Total_Price }} ج.م</strong></td>
+                            <td>
+                                {% if booking.Booking_Status == 'Confirmed' %}
+                                    <span class="status-badge status-confirmed">مؤكد</span>
+                                {% elif booking.Booking_Status == 'Checked-In' %}
+                                    <span class="status-badge status-checkedin">داخل</span>
+                                {% elif booking.Booking_Status == 'Completed' %}
+                                    <span class="status-badge status-completed">مكتمل</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ booking.Employee_Name }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="no-data">
+                    <i class="fas fa-inbox" style="font-size: 4rem; color: #ccc;"></i>
+                    <p style="font-size: 1.2rem; margin-top: 20px;">لا توجد حجوزات حالياً</p>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

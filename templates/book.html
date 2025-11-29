@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل عميل جديد | فندق الهضبة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a5490;
+            --accent-color: #2196F3;
+            --dark-color: #1e3a5f;
+            --light-color: #f5f7fa;
+            --text-dark: #2c3e50;
+            --text-light: #6c757d;
+            --danger-color: #e74c3c;
+            --success-color: #27ae60;
+            --border-radius: 12px;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem 0;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .registration-page {
+            margin-top: 100px;
+            padding-bottom: 2rem;
+        }
+
+        .registration-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .registration-form-container {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .form-section {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .form-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .form-section h3 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            font-size: 1.4rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row.full-width {
+            grid-template-columns: 1fr;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.6rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .form-group label i {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+        }
+
+        .form-group label .required {
+            color: var(--danger-color);
+            font-size: 1.2rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 1rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s;
+            background: #fafafa;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(26, 84, 144, 0.1);
+            background: white;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-hint {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 0.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .phones-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .phone-entry {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .phone-entry input {
+            flex: 2;
+        }
+
+        .phone-entry select {
+            flex: 1;
+        }
+
+        .btn-remove-phone {
+            padding: 1rem;
+            background: var(--danger-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-remove-phone:hover {
+            background: #c0392b;
+        }
+
+        .btn-add-phone {
+            padding: 0.8rem 1.5rem;
+            background: var(--success-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .btn-add-phone:hover {
+            background: #229954;
+        }
+
+        .alert {
+            padding: 1.2rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: none;
+            font-weight: 600;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1.3rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 2rem;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(26, 84, 144, 0.4);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .loading-spinner {
+            display: none;
+            width: 22px;
+            height: 22px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 0;
+            text-align: center;
+            color: white;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .registration-form-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-menu {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .phone-entry {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <i class="fas fa-hotel"></i>
+                    <span class="logo-text">فندق الهضبة</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">الرئيسية</a></li>
+                    <li><a href="/rooms">الغرف</a></li>
+                    <li><a href="/bookings">الحجوزات</a></li>
+                    <li><a href="/book">احجز الآن</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="registration-page">
+        <div class="container">
+            <div class="registration-container">
+                <div class="page-header">
+                    <h1>👤 تسجيل عميل جديد</h1>
+                    <p>املأ جميع البيانات المطلوبة لإضافة عميل جديد للنظام</p>
+                </div>
+
+                <div id="alertMessage" class="alert"></div>
+
+                <div class="registration-form-container">
+                    <form id="guestForm">
+                        
+                        <div class="form-section">
+                            <h3>
+                                <i class="fas fa-user-circle"></i>
+                                المعلومات الشخصية
+                            </h3>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="firstName">
+                                        <i class="fas fa-user"></i>
+                                        الاسم الأول
+                                        <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="firstName" name="first_name" required 
+                                           placeholder="أدخل الاسم الأول">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="lastName">
+                                        <i class="fas fa-user"></i>
+                                        الاسم الأخير
+                                        <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="lastName" name="last_name" required 
+                                           placeholder="أدخل الاسم الأخير">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="dateOfBirth">
+                                        <i class="fas fa-calendar-day"></i>
+                                        تاريخ الميلاد
+                                    </label>
+                                    <input type="date" id="dateOfBirth" name="date_of_birth">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="nationality">
+                                        <i class="fas fa-flag"></i>
+                                        الجنسية
+                                    </label>
+                                    <input type="text" id="nationality" name="nationality" 
+                                           placeholder="مثال: مصري">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>
+                                <i class="fas fa-address-book"></i>
+                                معلومات الاتصال
+                            </h3>
+                            
+                            <div class="form-row full-width">
+                                <div class="form-group">
+                                    <label>
+                                        <i class="fas fa-phone"></i>
+                                        أرقام الهاتف
+                                        <span class="required">*</span>
+                                    </label>
+                                    <div class="phones-container" id="phonesContainer">
+                                        <div class="phone-entry">
+                                            <input type="tel" class="phone-input" required 
+                                                   placeholder="01XXXXXXXXX">
+                                            <select class="phone-type">
+                                                <option value="Mobile">موبايل</option>
+                                                <option value="Home">منزل</option>
+                                                <option value="Work">عمل</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn-add-phone" id="addPhoneBtn">
+                                        <i class="fas fa-plus"></i>
+                                        إضافة رقم آخر
+                                    </button>
+                                    <p class="form-hint">
+                                        <i class="fas fa-info-circle"></i>
+                                        يمكنك إضافة أكثر من رقم تليفون
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">
+                                        <i class="fas fa-envelope"></i>
+                                        البريد الإلكتروني
+                                        <span class="required">*</span>
+                                    </label>
+                                    <input type="email" id="email" name="email" required 
+                                           placeholder="example@email.com">
+                                </div>
+                            </div>
+
+                            <div class="form-row full-width">
+                                <div class="form-group">
+                                    <label for="address">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        العنوان
+                                    </label>
+                                    <textarea id="address" name="address" 
+                                              placeholder="أدخل العنوان الكامل..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>
+                                <i class="fas fa-id-card"></i>
+                                بيانات التعريف
+                            </h3>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="nationalId">
+                                        <i class="fas fa-id-badge"></i>
+                                        الرقم القومي / رقم الهوية
+                                        <span class="required">*</span>
+                                    </label>
+                                    <input type="text" id="nationalId" name="national_id" required 
+                                           placeholder="أدخل الرقم القومي أو رقم جواز السفر">
+                                    <p class="form-hint">
+                                        <i class="fas fa-info-circle"></i>
+                                        يجب أن يكون رقماً فريداً (14 رقماً للمصريين)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-submit" id="submitBtn">
+                            <span id="btnText">تسجيل العميل</span>
+                            <div class="loading-spinner" id="loadingSpinner"></div>
+                            <i class="fas fa-user-plus" id="btnIcon"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-hotel"></i>
+                <span>فندق الهضبة</span>
+            </div>
+            <p>&copy; 2024 فندق الهضبة - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script>
+        const guestForm = document.getElementById('guestForm');
+        const alertMessage = document.getElementById('alertMessage');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const btnIcon = document.getElementById('btnIcon');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const phonesContainer = document.getElementById('phonesContainer');
+        const addPhoneBtn = document.getElementById('addPhoneBtn');
+
+        // تحديد أقصى تاريخ ميلاد (18 سنة من الآن)
+        const today = new Date();
+        const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+        document.getElementById('dateOfBirth').setAttribute('max', maxDate.toISOString().split('T')[0]);
+
+        // إضافة رقم تليفون جديد
+        addPhoneBtn.addEventListener('click', () => {
+            const phoneEntry = document.createElement('div');
+            phoneEntry.className = 'phone-entry';
+            phoneEntry.innerHTML = `
+                <input type="tel" class="phone-input" placeholder="01XXXXXXXXX">
+                <select class="phone-type">
+                    <option value="Mobile">موبايل</option>
+                    <option value="Home">منزل</option>
+                    <option value="Work">عمل</option>
+                </select>
+                <button type="button" class="btn-remove-phone">
+                    <i class="fas fa-trash"></i>
+                </button>
+            `;
+            
+            // إضافة وظيفة الحذف
+            phoneEntry.querySelector('.btn-remove-phone').addEventListener('click', function() {
+                phoneEntry.remove();
+            });
+            
+            phonesContainer.appendChild(phoneEntry);
+        });
+
+        // إرسال النموذج
+        guestForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // إخفاء الرسائل السابقة
+            alertMessage.style.display = 'none';
+
+            // جمع أرقام التليفونات
+            const phoneInputs = document.querySelectorAll('.phone-input');
+            const phoneTypes = document.querySelectorAll('.phone-type');
+            const phones = [];
+            
+            let hasInvalidPhone = false;
+            phoneInputs.forEach((input, index) => {
+                const phoneNumber = input.value.trim();
+                if (phoneNumber) {
+                    // التحقق من صحة رقم الهاتف المصري
+                    if (!/^01[0-2,5]{1}[0-9]{8}$/.test(phoneNumber)) {
+                        showAlert('error', `رقم الهاتف "${phoneNumber}" غير صحيح! يجب أن يبدأ بـ 01 ويتكون من 11 رقم`);
+                        hasInvalidPhone = true;
+                        return;
+                    }
+                    
+                    phones.push({
+                        number: phoneNumber,
+                        type: phoneTypes[index].value
+                    });
+                }
+            });
+
+            if (hasInvalidPhone) return;
+
+            if (phones.length === 0) {
+                showAlert('error', 'يجب إضافة رقم تليفون واحد على الأقل!');
+                return;
+            }
+
+            // التحقق من الرقم القومي
+            const nationalId = document.getElementById('nationalId').value;
+            if (nationalId.length < 10) {
+                showAlert('error', 'الرقم القومي قصير جداً! يجب أن يكون على الأقل 10 أرقام');
+                return;
+            }
+
+            // عرض Loading
+            submitBtn.disabled = true;
+            btnText.textContent = 'جاري التسجيل...';
+            btnIcon.style.display = 'none';
+            loadingSpinner.style.display = 'block';
+
+            const formData = {
+                first_name: document.getElementById('firstName').value,
+                last_name: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                national_id: nationalId,
+                date_of_birth: document.getElementById('dateOfBirth').value || null,
+                nationality: document.getElementById('nationality').value || null,
+                address: document.getElementById('address').value || null,
+                registration_date: new Date().toISOString().split('T')[0],
+                phones: phones
+            };
+
+            try {
+                const response = await fetch('/api/guests/add', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    // نجح التسجيل
+                    showAlert('success', `
+                        <i class="fas fa-check-circle"></i>
+                        <strong>✨ تم تسجيل العميل بنجاح!</strong><br>
+                        رقم العميل: <strong>#${result.guest_id}</strong><br>
+                        الاسم: <strong>${formData.first_name} ${formData.last_name}</strong><br>
+                        <br>
+                        <i class="fas fa-info-circle"></i> يمكنك الآن رؤية العميل في قائمة الحجوزات
+                    `);
+
+                    // إعادة تعيين النموذج
+                    guestForm.reset();
+
+                    // إعادة تفعيل الزر
+                    resetButton();
+                } else {
+                    // فشل التسجيل
+                    showAlert('error', `
+                        <i class="fas fa-exclamation-circle"></i>
+                        <strong>حدث خطأ:</strong> ${result.error}
+                    `);
+
+                    // إعادة تفعيل الزر
+                    resetButton();
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                showAlert('error', `
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <strong>حدث خطأ في الاتصال</strong><br>
+                    الرجاء المحاولة مرة أخرى
+                `);
+
+                // إعادة تفعيل الزر
+                resetButton();
+            }
+        });
+
+        function showAlert(type, message) {
+            alertMessage.className = `alert alert-${type}`;
+            alertMessage.innerHTML = message;
+            alertMessage.style.display = 'block';
+            alertMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function resetButton() {
+            submitBtn.disabled = false;
+            btnText.textContent = 'تسجيل العميل';
+            btnIcon.style.display = 'inline';
+            loadingSpinner.style.display = 'none';
+        }
+
+        // التحقق من صحة البريد الإلكتروني أثناء الكتابة
+        document.getElementById('email').addEventListener('blur', function() {
+            const email = this.value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (email && !emailRegex.test(email)) {
+                this.style.borderColor = 'var(--danger-color)';
+                showAlert('error', 'البريد الإلكتروني غير صحيح!');
+            } else {
+                this.style.borderColor = '#e0e0e0';
+                if (alertMessage.classList.contains('alert-error')) {
+                    alertMessage.style.display = 'none';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

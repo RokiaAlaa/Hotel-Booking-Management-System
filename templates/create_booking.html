@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إتمام الحجز | فندق الهضبة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #1a5490;
+            --accent-color: #2c7fb8;
+            --dark-color: #1e3a5f;
+            --light-color: #f5f7fa;
+            --text-dark: #2c3e50;
+            --text-light: #6c757d;
+            --danger-color: #e74c3c;
+            --success-color: #27ae60;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: var(--light-color);
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-color));
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main Content */
+        .booking-full-page {
+            padding: 120px 0 60px;
+            min-height: 100vh;
+            background: var(--light-color);
+        }
+
+        .booking-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .section-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .section-header h2 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin: 0;
+        }
+
+        .guest-info-display {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-right: 4px solid var(--primary-color);
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 0.8rem 0;
+        }
+
+        .info-label {
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .info-value {
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: inherit;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(26, 84, 144, 0.1);
+        }
+
+        .services-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .service-item {
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 1rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .service-item:hover {
+            border-color: var(--primary-color);
+            background: #f8f9fa;
+        }
+
+        .service-item.selected {
+            border-color: var(--primary-color);
+            background: linear-gradient(135deg, rgba(26, 84, 144, 0.05), rgba(44, 127, 184, 0.05));
+        }
+
+        .service-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .service-title {
+            font-weight: 600;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .service-price {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .service-desc {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .service-quantity {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .qty-btn {
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--primary-color);
+            background: white;
+            color: var(--primary-color);
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .qty-btn:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .qty-input {
+            width: 50px;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            padding: 0.3rem;
+        }
+
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .summary-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .summary-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .summary-header h3 {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 1rem 0;
+            padding: 0.5rem 0;
+        }
+
+        .summary-row.total {
+            border-top: 2px solid var(--primary-color);
+            padding-top: 1rem;
+            margin-top: 1.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .summary-row .value {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1.5rem;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            color: #155724;
+            border: 2px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 2px solid #f5c6cb;
+        }
+
+        .error-message {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            color: #856404;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .error-message a {
+            color: var(--primary-color);
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        .footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        @media (max-width: 1024px) {
+            .booking-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .sidebar {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <i class="fas fa-hotel"></i>
+                    <span class="logo-text">فندق الهضبة</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/">الرئيسية</a></li>
+                    <li><a href="/rooms">الغرف</a></li>
+                    <li><a href="/bookings">الحجوزات</a></li>
+                    <li><a href="/book-start" class="active">احجز الآن</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="booking-full-page" data-guest-id="{{ guest.Guest_ID if guest else '' }}">
+        <div class="container">
+            <div id="alertMessage" class="alert"></div>
+
+            <div class="booking-layout">
+                <div class="main-content">
+                    <!-- Guest Info -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <i class="fas fa-user-circle" style="font-size: 1.8rem; color: var(--primary-color);"></i>
+                            <h2>معلومات العميل</h2>
+                        </div>
+                        {% if guest %}
+                        <div class="guest-info-display">
+                            <div class="info-row">
+                                <span class="info-label">الاسم:</span>
+                                <span class="info-value">{{ guest.Name }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">البريد:</span>
+                                <span class="info-value">{{ guest.Email }}</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">الهاتف:</span>
+                                <span class="info-value">{{ guest.Phone if guest.Phone else 'غير متوفر' }}</span>
+                            </div>
+                            {% if guest.Address %}
+                            <div class="info-row">
+                                <span class="info-label">العنوان:</span>
+                                <span class="info-value">{{ guest.Address }}</span>
+                            </div>
+                            {% endif %}
+                        </div>
+                        {% else %}
+                        <div class="error-message">
+                            <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                            <p style="font-size: 1.1rem; margin-bottom: 1rem;">⚠️ لم يتم تحديد عميل</p>
+                            <a href="/book-start">← العودة لنقطة البداية</a>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    {% if guest %}
+                    <!-- Room Selection -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <i class="fas fa-bed" style="font-size: 1.8rem; color: var(--primary-color);"></i>
+                            <h2>اختيار الغرفة</h2>
+                        </div>
+                        <div class="form-group">
+                            <label for="room">الغرفة <span style="color: var(--danger-color);">*</span></label>
+                            <select id="room" required>
+                                <option value="">-- اختر غرفة --</option>
+                                {% for room in rooms %}
+                                <option value="{{ room.Room_ID }}" data-price="{{ room.Price_Per_Night }}" data-capacity="{{ room.Max_Occupancy }}">
+                                    غرفة {{ room.Room_Number }} - {{ room.Type_Name }} ({{ room.Price_Per_Night }} ج.م/ليلة)
+                                </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-row" style="margin-top: 1.5rem;">
+                            <div class="form-group">
+                                <label for="checkin">تاريخ الدخول <span style="color: var(--danger-color);">*</span></label>
+                                <input type="date" id="checkin" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="checkout">تاريخ المغادرة <span style="color: var(--danger-color);">*</span></label>
+                                <input type="date" id="checkout" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="guests">عدد الضيوف <span style="color: var(--danger-color);">*</span></label>
+                            <input type="number" id="guests" min="1" max="6" value="1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="requests">طلبات خاصة</label>
+                            <textarea id="requests" rows="3" placeholder="أي ملاحظات أو طلبات خاصة..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Services -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <i class="fas fa-concierge-bell" style="font-size: 1.8rem; color: var(--primary-color);"></i>
+                            <h2>الخدمات الإضافية</h2>
+                        </div>
+                        <div class="services-grid">
+                            {% if services %}
+                                {% for service in services %}
+                                <div class="service-item" data-service-id="{{ service.Service_ID }}" data-price="{{ service.Price }}">
+                                    <div class="service-header">
+                                        <div class="service-title">
+                                            <input type="checkbox" class="service-checkbox">
+                                            <span>{{ service.Service_Name }}</span>
+                                        </div>
+                                        <span class="service-price">{{ service.Price }} ج.م</span>
+                                    </div>
+                                    <div class="service-desc">{{ service.Description }}</div>
+                                    <div class="service-quantity" style="display: none;">
+                                        <span>الكمية:</span>
+                                        <button type="button" class="qty-btn qty-minus">-</button>
+                                        <input type="number" class="qty-input" value="1" min="1" max="10">
+                                        <button type="button" class="qty-btn qty-plus">+</button>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% else %}
+                                <p style="color: var(--text-light); text-align: center; padding: 2rem;">لا توجد خدمات متاحة حالياً</p>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Payment -->
+                    <div class="section-card">
+                        <div class="section-header">
+                            <i class="fas fa-credit-card" style="font-size: 1.8rem; color: var(--primary-color);"></i>
+                            <h2>الدفع</h2>
+                        </div>
+                        <div class="form-group">
+                            <label for="paymentMethod">طريقة الدفع <span style="color: var(--danger-color);">*</span></label>
+                            <select id="paymentMethod" required>
+                                <option value="Cash">كاش</option>
+                                <option value="Credit Card">بطاقة ائتمان</option>
+                                <option value="Debit Card">بطاقة خصم</option>
+                                <option value="Bank Transfer">تحويل بنكي</option>
+                            </select>
+                        </div>
+                    </div>
+                    {% endif %}
+                </div>
+
+                {% if guest %}
+                <!-- Summary Sidebar -->
+                <div class="sidebar">
+                    <div class="summary-card">
+                        <div class="summary-header">
+                            <h3>ملخص الحجز</h3>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>سعر الغرفة:</span>
+                            <span class="value" id="roomPrice">0 ج.م</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>عدد الليالي:</span>
+                            <span class="value" id="nights">0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>إجمالي الغرفة:</span>
+                            <span class="value" id="roomTotal">0 ج.م</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>الخدمات الإضافية:</span>
+                            <span class="value" id="servicesTotal">0 ج.م</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>الإجمالي الكلي:</span>
+                            <span class="value" id="grandTotal">0 ج.م</span>
+                        </div>
+
+                        <button type="button" class="btn-submit" id="submitBtn">
+                            <i class="fas fa-check-circle"></i>
+                            تأكيد الحجز والدفع
+                        </button>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-hotel"></i>
+                <span>فندق الهضبة</span>
+            </div>
+            <p>&copy; 2024 فندق الهضبة - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script>
+        // ✅ جلب guestId من data attribute بشكل آمن
+        const bookingPage = document.querySelector('.booking-full-page');
+        const guestId = bookingPage.dataset.guestId ? parseInt(bookingPage.dataset.guestId) : null;
+        
+        // لو مفيش عميل، وقف السكريبت
+        if (!guestId) {
+            console.log('⚠️ لم يتم تحديد عميل');
+        } else {
+            const roomSelect = document.getElementById('room');
+            const checkinInput = document.getElementById('checkin');
+            const checkoutInput = document.getElementById('checkout');
+            const guestsInput = document.getElementById('guests');
+            const paymentMethodSelect = document.getElementById('paymentMethod');
+            
+            // تعيين تاريخ اليوم كحد أدنى
+            const today = new Date().toISOString().split('T')[0];
+            checkinInput.setAttribute('min', today);
+
+            // تحديث تاريخ المغادرة
+            checkinInput.addEventListener('change', function() {
+                const checkin = new Date(this.value);
+                const minCheckout = new Date(checkin);
+                minCheckout.setDate(minCheckout.getDate() + 1);
+                checkoutInput.setAttribute('min', minCheckout.toISOString().split('T')[0]);
+                if (checkoutInput.value && new Date(checkoutInput.value) <= checkin) {
+                    checkoutInput.value = '';
+                }
+                calculateTotal();
+            });
+
+            checkoutInput.addEventListener('change', calculateTotal);
+            roomSelect.addEventListener('change', calculateTotal);
+
+            // معالجة الخدمات
+            document.querySelectorAll('.service-item').forEach(item => {
+                const checkbox = item.querySelector('.service-checkbox');
+                const qtyContainer = item.querySelector('.service-quantity');
+                const qtyInput = item.querySelector('.qty-input');
+                const plusBtn = item.querySelector('.qty-plus');
+                const minusBtn = item.querySelector('.qty-minus');
+
+                checkbox.addEventListener('change', function() {
+                    if (this.checked) {
+                        item.classList.add('selected');
+                        qtyContainer.style.display = 'flex';
+                    } else {
+                        item.classList.remove('selected');
+                        qtyContainer.style.display = 'none';
+                        qtyInput.value = 1;
+                    }
+                    calculateTotal();
+                });
+
+                plusBtn.addEventListener('click', () => {
+                    qtyInput.value = parseInt(qtyInput.value) + 1;
+                    calculateTotal();
+                });
+
+                minusBtn.addEventListener('click', () => {
+                    if (parseInt(qtyInput.value) > 1) {
+                        qtyInput.value = parseInt(qtyInput.value) - 1;
+                        calculateTotal();
+                    }
+                });
+
+                qtyInput.addEventListener('change', calculateTotal);
+            });
+
+            function calculateTotal() {
+                const checkin = new Date(checkinInput.value);
+                const checkout = new Date(checkoutInput.value);
+                const selectedRoom = roomSelect.options[roomSelect.selectedIndex];
+                const pricePerNight = parseFloat(selectedRoom.dataset.price) || 0;
+
+                document.getElementById('roomPrice').textContent = pricePerNight.toLocaleString() + ' ج.م';
+
+                let roomTotal = 0;
+                let nights = 0;
+
+                if (checkin && checkout && checkout > checkin && pricePerNight > 0) {
+                    nights = Math.ceil((checkout - checkin) / (1000 * 60 * 60 * 24));
+                    roomTotal = nights * pricePerNight;
+                }
+
+                document.getElementById('nights').textContent = nights;
+                document.getElementById('roomTotal').textContent = roomTotal.toLocaleString() + ' ج.م';
+
+                // حساب الخدمات
+                let servicesTotal = 0;
+                document.querySelectorAll('.service-item').forEach(item => {
+                    const checkbox = item.querySelector('.service-checkbox');
+                    if (checkbox.checked) {
+                        const price = parseFloat(item.dataset.price);
+                        const qty = parseInt(item.querySelector('.qty-input').value);
+                        servicesTotal += price * qty;
+                    }
+                });
+
+                document.getElementById('servicesTotal').textContent = servicesTotal.toLocaleString() + ' ج.م';
+                document.getElementById('grandTotal').textContent = (roomTotal + servicesTotal).toLocaleString() + ' ج.م';
+            }
+
+            // إرسال الحجز
+            document.getElementById('submitBtn').addEventListener('click', async function() {
+                if (!roomSelect.value || !checkinInput.value || !checkoutInput.value) {
+                    alert('الرجاء ملء جميع الحقول المطلوبة');
+                    return;
+                }
+
+                // جمع الخدمات المختارة
+                const selectedServices = [];
+                document.querySelectorAll('.service-item').forEach(item => {
+                    const checkbox = item.querySelector('.service-checkbox');
+                    if (checkbox.checked) {
+                        selectedServices.push({
+                            service_id: item.dataset.serviceId,
+                            price: item.dataset.price,
+                            quantity: item.querySelector('.qty-input').value
+                        });
+                    }
+                });
+
+                const bookingData = {
+                    guest_id: guestId,
+                    room_id: roomSelect.value,
+                    checkin: checkinInput.value,
+                    checkout: checkoutInput.value,
+                    guests: guestsInput.value,
+                    special_requests: document.getElementById('requests').value,
+                    services: selectedServices,
+                    payment_method: paymentMethodSelect.value,
+                    payment_amount: parseFloat(document.getElementById('grandTotal').textContent.replace(/[^\d.]/g, ''))
+                };
+
+                this.disabled = true;
+                this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري المعالجة...';
+
+                try {
+                    const response = await fetch('/api/bookings/create-full', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(bookingData)
+                    });
+
+                    const result = await response.json();
+
+                    if (result.success) {
+                        const alertMessage = document.getElementById('alertMessage');
+                        alertMessage.className = 'alert alert-success';
+                        alertMessage.innerHTML = `
+                            <strong>✅ تم الحجز بنجاح!</strong><br>
+                            رقم الحجز: <strong>#${result.booking_id}</strong><br>
+                            رقم المعاملة: <strong>${result.transaction_id}</strong><br>
+                            الإجمالي: <strong>${result.total_price.toLocaleString()} ج.م</strong><br>
+                            جاري التحويل...
+                        `;
+                        alertMessage.style.display = 'block';
+                        window.scrollTo(0, 0);
+
+                        setTimeout(() => {
+                            window.location.href = '/bookings';
+                        }, 3000);
+                    } else {
+                        alert('خطأ: ' + result.error);
+                        this.disabled = false;
+                        this.innerHTML = '<i class="fas fa-check-circle"></i> تأكيد الحجز والدفع';
+                    }
+                } catch (error) {
+                    alert('حدث خطأ في الاتصال');
+                    this.disabled = false;
+                    this.innerHTML = '<i class="fas fa-check-circle"></i> تأكيد الحجز والدفع';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
