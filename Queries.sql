@@ -10,10 +10,11 @@ FROM Rooms
 WHERE Room_ID = 7 AND status = 'Available';
 
 -- 3. Check for overlapping bookings
-SELECT Booking_ID, Check_In_Date, Check_Out_Date
-FROM Bookings
-WHERE Room_ID = 7 
-AND NOT (Check_Out_Date <= '2024-12-05' OR Check_In_Date >= '2024-12-10');
+SELECT r.Room_ID, r.Room_Number, r.Status
+FROM Rooms r
+JOIN Bookings b ON b.Room_ID = r.Room_ID
+WHERE r.Room_ID = 7 
+AND NOT (b.Check_Out_Date <= '2024-12-05' OR b.Check_In_Date >= '2024-12-10');
 
 -- 4. Insert a new booking
 INSERT INTO Bookings
@@ -34,9 +35,10 @@ SELECT * FROM Bookings
 WHERE Booking_ID = 2 AND Booking_Status = 'Confirmed';
 
 -- 2. Check room status
-SELECT Room_ID, Room_Number, Status
-FROM Rooms
-WHERE Room_ID = (SELECT Room_ID FROM Bookings WHERE Booking_ID = 2);
+SELECT r.Room_ID, r.Room_Number, r.Status
+FROM Rooms r
+JOIN Bookings b ON b.Room_ID = r.Room_ID
+WHERE b.Booking_ID = 2;
 
 -- 3. Verify payments
 SELECT Booking_ID, SUM(Amount) AS Total_Paid
@@ -50,9 +52,11 @@ SET Booking_Status = 'Checked-In'
 WHERE Booking_ID = 2;
 
 -- 5. Update room status to Occupied
-UPDATE Rooms 
-SET Status = 'Occupied' 
-WHERE Room_ID = (SELECT Room_ID FROM Bookings WHERE Booking_ID = 2);
+UPDATE Rooms r
+JOIN Bookings b on r.Room_ID = b.Room_ID
+SET r.Status = 'Occupied' 
+WHERE Booking_ID = 2
+	AND b.Booking_Status = 'Confirmed';
 
 
 -- TRANSACTION 3: CHECK-OUT
@@ -141,19 +145,14 @@ WHERE Booking_ID = 5;
 INSERT INTO Payments 
     (Booking_ID, Payment_Date, Amount,
     Payment_Method, Payment_Status, Transaction_ID)
-VALUES (5, NOW(), 200, 'Cash', 'Completed', 'TXN_NEW_001');
+VALUES (5, NOW(), 200, 'Cash', 'Completed', 'TXN_NEW_003');
 
 -- 3. Check if Paid >= Total_Price 
-SELECT 
-    (SELECT Total_Price FROM Bookings WHERE Booking_ID = 5) AS Total_Price,
-    SUM(Amount) AS Total_Paid
-FROM Payments
-WHERE Booking_ID = 5 AND Payment_Status = 'Completed';
-  
--- 4. Mark booking payment status -> Paid
-UPDATE Bookings
-SET Booking_Status = 'Confirmed'
-WHERE Booking_ID = 5;
+SELECT b.Total_price, SUM(p.Amount) AS Total_paid
+FROM Bookings b
+JOIN Payments p ON b.Booking_ID = p.Booking_ID AND p.Payment_Status = 'Completed'
+WHERE b.Booking_ID = 5
+GROUP BY b.Total_Price;
 
 -- TRANSACTION 7: UPDATE ROOM STATUS
 
